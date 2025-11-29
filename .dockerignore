@@ -1,0 +1,40 @@
+# Build artifacts
+*.apk
+*.aab
+*.ap_
+*.dex
+*.class
+
+# Gradle files
+.gradle/
+build/
+*/build/
+gradle-app.setting
+!gradle-wrapper.jar
+
+# Local configuration
+local.properties
+
+# IDE files
+.idea/
+*.iml
+.DS_Store
+
+# Version control
+.git/
+.gitignore
+
+# Logs
+*.log
+
+# Keystore files (security)
+*.jks
+*.keystore
+
+# Generated files
+bin/
+gen/
+out/
+
+# Signing files
+release/
