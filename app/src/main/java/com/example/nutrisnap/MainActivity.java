@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
     // TODO: Replace with secure key management in production
-    private static final String GEMINI_API_KEY = "AIzaSyAWG5j1U45Yqrj0cbQ7khJJoc10_K7vnSM";
+    private static final String GEMINI_API_KEY = "AIzaSyC3R38lcvRVd1Ii3oUOLb6TysOyX0RShWo";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

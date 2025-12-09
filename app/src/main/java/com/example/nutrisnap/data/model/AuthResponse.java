@@ -13,5 +13,14 @@ public class AuthResponse {
         public String id;
         @SerializedName("email")
         public String email;
+        @SerializedName("email_confirmed_at")
+        public String emailConfirmedAt;
+        @SerializedName("confirmed_at")
+        public String confirmedAt;
+
+        public boolean isEmailConfirmed() {
+            return (emailConfirmedAt != null && !emailConfirmedAt.isEmpty()) ||
+                    (confirmedAt != null && !confirmedAt.isEmpty());
+        }
     }
 }

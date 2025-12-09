@@ -139,20 +139,102 @@ public class OnboardingWizardActivity extends AppCompatActivity {
             return;
         }
 
-        // Navigate to Macro Calculation Activity
-        Intent intent = new Intent(this, MacroCalculationActivity.class);
+        // Save profile to database and navigate to dashboard
+        saveProfileAndNavigate();
+    }
 
-        // Pass all data
-        intent.putExtra("full_name", viewModel.getFullName().getValue());
-        intent.putExtra("age", viewModel.getAge().getValue());
-        intent.putExtra("gender", viewModel.getGender().getValue());
-        intent.putExtra("height", viewModel.getHeight().getValue());
-        intent.putExtra("current_weight", viewModel.getCurrentWeight().getValue());
-        intent.putExtra("fitness_goal", viewModel.getFitnessGoal().getValue());
-        intent.putExtra("activity_level", viewModel.getActivityLevel().getValue());
-        intent.putExtra("desired_weight", viewModel.getDesiredWeight().getValue());
-        intent.putExtra("obstacles", viewModel.getObstacles().getValue());
+    private void saveProfileAndNavigate() {
+        String userId = getSharedPreferences("NutrisnapPrefs", MODE_PRIVATE).getString("user_id", null);
+        String accessToken = getSharedPreferences("NutrisnapPrefs", MODE_PRIVATE).getString("access_token", null);
 
+        if (userId == null || accessToken == null) {
+            Toast.makeText(this, "Please login first", Toast.LENGTH_SHORT).show();
+            finish();
+            return;
+        }
+
+        // Create profile with ALL onboarding data
+        com.example.nutrisnap.data.model.UserProfile profile = new com.example.nutrisnap.data.model.UserProfile();
+        profile.userId = userId;
+        profile.fullName = viewModel.getFullName().getValue();
+        profile.age = viewModel.getAge().getValue();
+        profile.gender = viewModel.getGender().getValue();
+        profile.height = viewModel.getHeight().getValue();
+        profile.weight = viewModel.getCurrentWeight().getValue(); // Also save to weight field
+        profile.currentWeight = viewModel.getCurrentWeight().getValue();
+        profile.goal = viewModel.getFitnessGoal().getValue(); // Also save to goal field
+        profile.fitnessGoal = viewModel.getFitnessGoal().getValue();
+        profile.activityLevel = viewModel.getActivityLevel().getValue();
+        profile.desiredWeight = viewModel.getDesiredWeight().getValue();
+        profile.obstacles = viewModel.getObstacles().getValue();
+        profile.onboardingComplete = true;
+        profile.profileComplete = true; // Mark profile as complete
+
+        // Save to Supabase
+        String SUPABASE_URL = "https://yveealpqkahlwipdwuau.supabase.co/";
+        String SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl2ZWVhbHBxa2FobHdpcGR3dWF1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjI3NjkzMDcsImV4cCI6MjA3ODM0NTMwN30.m_IgyNHOjwIkPcA1JnGWUf69vSMO-a-7xn0wCbTJ7l0";
+
+        com.example.nutrisnap.data.SupabaseService service = com.example.nutrisnap.data.RetrofitClient
+                .getSupabaseClient(SUPABASE_URL)
+                .create(com.example.nutrisnap.data.SupabaseService.class);
+
+        // Try to create profile first (for new users)
+        service.createUserProfile(SUPABASE_KEY, "Bearer " + accessToken, "return=minimal", profile)
+                .enqueue(new retrofit2.Callback<Void>() {
+                    @Override
+                    public void onResponse(retrofit2.Call<Void> call, retrofit2.Response<Void> response) {
+                        if (response.isSuccessful()) {
+                            // Profile created successfully
+                            Toast.makeText(OnboardingWizardActivity.this, "Profile saved successfully!",
+                                    Toast.LENGTH_SHORT).show();
+                            navigateToDashboard();
+                        } else if (response.code() == 409) {
+                            // Profile already exists, update it instead
+                            updateExistingProfile(service, SUPABASE_KEY, accessToken, userId, profile);
+                        } else {
+                            // Try update as fallback
+                            updateExistingProfile(service, SUPABASE_KEY, accessToken, userId, profile);
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(retrofit2.Call<Void> call, Throwable t) {
+                        // If create fails, try update
+                        updateExistingProfile(service, SUPABASE_KEY, accessToken, userId, profile);
+                    }
+                });
+    }
+
+    private void updateExistingProfile(com.example.nutrisnap.data.SupabaseService service,
+            String apiKey, String accessToken, String userId,
+            com.example.nutrisnap.data.model.UserProfile profile) {
+        String userIdFilter = "eq." + userId;
+
+        service.updateUserProfile(apiKey, "Bearer " + accessToken, "return=minimal", userIdFilter, profile)
+                .enqueue(new retrofit2.Callback<Void>() {
+                    @Override
+                    public void onResponse(retrofit2.Call<Void> call, retrofit2.Response<Void> response) {
+                        if (response.isSuccessful()) {
+                            Toast.makeText(OnboardingWizardActivity.this, "Profile updated successfully!",
+                                    Toast.LENGTH_SHORT).show();
+                            navigateToDashboard();
+                        } else {
+                            Toast.makeText(OnboardingWizardActivity.this, "Failed to save profile. Please try again.",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(retrofit2.Call<Void> call, Throwable t) {
+                        Toast.makeText(OnboardingWizardActivity.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT)
+                                .show();
+                    }
+                });
+    }
+
+    private void navigateToDashboard() {
+        Intent intent = new Intent(OnboardingWizardActivity.this, com.example.nutrisnap.ui.DashboardActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
         finish();
     }

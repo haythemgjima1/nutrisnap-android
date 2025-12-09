@@ -23,7 +23,7 @@ import retrofit2.Response;
 public class MacroCalculationActivity extends AppCompatActivity {
 
     private static final String TAG = "MacroCalculation";
-    private static final String GEMINI_API_KEY = "AIzaSyAWG5j1U45Yqrj0cbQ7khJJoc10_K7vnSM";
+    private static final String GEMINI_API_KEY = "AIzaSyC3R38lcvRVd1Ii3oUOLb6TysOyX0RShWo";
     private static final String SUPABASE_URL = "https://yveealpqkahlwipdwuau.supabase.co/";
     private static final String SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl2ZWVhbHBxa2FobHdpcGR3dWF1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjI3NjkzMDcsImV4cCI6MjA3ODM0NTMwN30.m_IgyNHOjwIkPcA1JnGWUf69vSMO-a-7xn0wCbTJ7l0";
 

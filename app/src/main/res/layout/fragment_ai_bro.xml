@@ -1,42 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/gradient_phantom_background">
 
+    <!-- Header -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp"
+        android:background="@drawable/gradient_phantom_primary">
+        
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="AI Bro"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:textColor="@color/phantom_text_primary"
+            android:fontFamily="sans-serif-medium" />
+        
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Your AI Fitness Trainer"
+            android:textSize="14sp"
+            android:textColor="@color/phantom_text_secondary"
+            android:layout_marginTop="4dp" />
+    </LinearLayout>
+
+    <!-- Chat RecyclerView -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvChat"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:padding="16dp" />
+        android:padding="16dp"
+        android:clipToPadding="false" />
 
+    <!-- Progress Bar -->
     <ProgressBar
         android:id="@+id/progressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:indeterminateTint="@color/phantom_purple_light"
         android:visibility="gone" />
 
+    <!-- Input Area -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="16dp"
-        android:gravity="center_vertical">
+        android:gravity="center_vertical"
+        android:background="@color/phantom_bg_secondary"
+        android:elevation="8dp">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etMessage"
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="Ask for workout recommendations..."
-            android:layout_marginEnd="8dp" />
+            android:layout_marginEnd="12dp"
+            app:cardBackgroundColor="@color/phantom_surface_card"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="0dp"
+            app:strokeWidth="1dp"
+            app:strokeColor="@color/phantom_border_medium">
+            
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etMessage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Ask for workout recommendations..."
+                android:textColorHint="@color/phantom_text_tertiary"
+                android:textColor="@color/phantom_text_primary"
+                android:padding="14dp"
+                android:background="@android:color/transparent"
+                android:maxLines="4"
+                android:inputType="textCapSentences|textMultiLine" />
+        </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnSend"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Send" />
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:text="→"
+            android:textSize="24sp"
+            android:textColor="@color/phantom_text_primary"
+            android:background="@drawable/bg_button_phantom"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            app:cornerRadius="12dp"
+            app:elevation="4dp" />
     </LinearLayout>
 </LinearLayout>

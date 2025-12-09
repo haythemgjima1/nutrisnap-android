@@ -33,7 +33,7 @@ import retrofit2.Response;
 public class AiBroFragment extends Fragment {
 
     private static final String TAG = "AiBroFragment";
-    private static final String GEMINI_API_KEY = "AIzaSyAWG5j1U45Yqrj0cbQ7khJJoc10_K7vnSM";
+    private static final String GEMINI_API_KEY = "AIzaSyC3R38lcvRVd1Ii3oUOLb6TysOyX0RShWo";
     private static final String SUPABASE_URL = "https://yveealpqkahlwipdwuau.supabase.co/";
     private static final String SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl2ZWVhbHBxa2FobHdpcGR3dWF1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjI3NjkzMDcsImV4cCI6MjA3ODM0NTMwN30.m_IgyNHOjwIkPcA1JnGWUf69vSMO-a-7xn0wCbTJ7l0";
 
@@ -181,6 +181,35 @@ public class AiBroFragment extends Fragment {
                         Log.e(TAG, "Exception details: " + e.getMessage());
                         e.printStackTrace();
                         Toast.makeText(requireContext(), "Error parsing response", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    try {
+                        String errorBody = response.errorBody() != null ? response.errorBody().string()
+                                : "No error body";
+                        Log.e(TAG, "API failed - Code: " + response.code());
+                        Log.e(TAG, "Error body: " + errorBody);
+
+                        String errorMessage;
+                        if (response.code() == 429) {
+                            errorMessage = "Rate limit exceeded. Please wait a few minutes and try again.";
+                        } else if (response.code() == 403) {
+                            errorMessage = "Invalid API key. Please check your configuration.";
+                        } else if (response.code() == 400) {
+                            errorMessage = "Bad request. The API request format is invalid.";
+                        } else {
+                            errorMessage = "API error: " + response.code();
+                        }
+
+                        Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_LONG).show();
+
+                        // Add error message to chat
+                        ChatMessage errorMsg = new ChatMessage(null,
+                                "⚠️ " + errorMessage, false);
+                        messages.add(errorMsg);
+                        chatAdapter.notifyItemInserted(messages.size() - 1);
+                    } catch (Exception e) {
+                        Log.e(TAG, "Error reading error body", e);
+                        Toast.makeText(requireContext(), "API error: " + response.code(), Toast.LENGTH_SHORT).show();
                     }
                 }
             }

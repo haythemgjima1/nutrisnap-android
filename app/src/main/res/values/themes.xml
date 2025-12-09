@@ -1,34 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Light Theme (Default) -->
-    <style name="Base.Theme.Nutrisnap" parent="Theme.Material3.Light.NoActionBar">
-        <item name="colorPrimary">@color/primary_electric_blue</item>
-        <item name="colorOnPrimary">@color/white</item>
-        <item name="colorSecondary">@color/accent_teal</item>
-        <item name="colorOnSecondary">@color/white</item>
-        <item name="android:statusBarColor">@color/background_light</item>
-        <item name="android:navigationBarColor">@color/background_light</item>
-        <item name="android:windowLightStatusBar">true</item>
+    <!-- Phantom Wallet Dark Theme -->
+    <style name="Base.Theme.Nutrisnap" parent="Theme.Material3.Dark.NoActionBar">
+        <item name="colorPrimary">@color/phantom_purple_light</item>
+        <item name="colorOnPrimary">@color/phantom_text_primary</item>
+        <item name="colorSecondary">@color/phantom_accent_teal</item>
+        <item name="colorOnSecondary">@color/phantom_text_primary</item>
+        <item name="colorTertiary">@color/phantom_accent_purple</item>
+        
+        <!-- Status and Navigation Bars -->
+        <item name="android:statusBarColor">@color/phantom_bg_primary</item>
+        <item name="android:navigationBarColor">@color/phantom_bg_primary</item>
+        <item name="android:windowLightStatusBar">false</item>
         
         <!-- Background colors -->
-        <item name="android:colorBackground">@color/background_light</item>
-        <item name="colorSurface">@color/surface_light</item>
-        <item name="colorOnSurface">@color/text_primary_light</item>
-        <item name="colorOnBackground">@color/text_primary_light</item>
+        <item name="android:colorBackground">@color/phantom_bg_primary</item>
+        <item name="colorSurface">@color/phantom_surface_card</item>
+        <item name="colorOnSurface">@color/phantom_text_primary</item>
+        <item name="colorOnBackground">@color/phantom_text_primary</item>
         
         <!-- Text colors -->
-        <item name="android:textColorPrimary">@color/text_primary_light</item>
-        <item name="android:textColorSecondary">@color/text_secondary_light</item>
+        <item name="android:textColorPrimary">@color/phantom_text_primary</item>
+        <item name="android:textColorSecondary">@color/phantom_text_secondary</item>
+        <item name="android:textColorTertiary">@color/phantom_text_tertiary</item>
         
         <!-- Font -->
         <item name="android:fontFamily">sans-serif</item>
+        <item name="fontFamily">sans-serif</item>
+        
+        <!-- Material Components -->
+        <item name="materialCardViewStyle">@style/Widget.Nutrisnap.CardView</item>
+        <item name="materialButtonStyle">@style/Widget.Nutrisnap.Button</item>
     </style>
 
     <style name="Theme.Nutrisnap" parent="Base.Theme.Nutrisnap" />
 
     <style name="Theme.Nutrisnap.Splash" parent="Theme.Nutrisnap">
-        <item name="android:windowBackground">@color/background_light</item>
+        <item name="android:windowBackground">@drawable/gradient_phantom_background</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowFullscreen">false</item>
+    </style>
+    
+    <!-- Custom Card Style -->
+    <style name="Widget.Nutrisnap.CardView" parent="Widget.Material3.CardView.Elevated">
+        <item name="cardBackgroundColor">@color/phantom_surface_card</item>
+        <item name="cardCornerRadius">16dp</item>
+        <item name="cardElevation">4dp</item>
+        <item name="strokeColor">@color/phantom_border_subtle</item>
+        <item name="strokeWidth">1dp</item>
+    </style>
+    
+    <!-- Custom Button Style -->
+    <style name="Widget.Nutrisnap.Button" parent="Widget.Material3.Button">
+        <item name="backgroundTint">@color/phantom_purple_light</item>
+        <item name="cornerRadius">12dp</item>
+        <item name="android:textColor">@color/phantom_text_primary</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+    </style>
+    
+    <!-- Calendar Styles -->
+    <style name="CalendarDateTextAppearance">
+        <item name="android:textColor">@color/phantom_text_primary</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+    
+    <style name="CalendarWeekDayTextAppearance">
+        <item name="android:textColor">@color/phantom_text_secondary</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textStyle">bold</item>
     </style>
 </resources>

@@ -52,7 +52,23 @@ public class ScanFragment extends Fragment {
     private static final String TAG = "ScanFragment";
     private static final int REQUEST_CODE_PERMISSIONS = 10;
     private static final String[] REQUIRED_PERMISSIONS = new String[] { Manifest.permission.CAMERA };
-    private static final String GEMINI_API_KEY = "AIzaSyAWG5j1U45Yqrj0cbQ7khJJoc10_K7vnSM";
+    private static final String GEMINI_API_KEY = "AIzaSyC3R38lcvRVd1Ii3oUOLb6TysOyX0RShWo";
+
+    private final ActivityResultLauncher<String[]> requestPermissionLauncher = registerForActivityResult(
+            new ActivityResultContracts.RequestMultiplePermissions(), permissions -> {
+                boolean allGranted = true;
+                for (Boolean granted : permissions.values()) {
+                    if (!granted) {
+                        allGranted = false;
+                        break;
+                    }
+                }
+                if (allGranted) {
+                    startCamera();
+                } else {
+                    Toast.makeText(requireContext(), "Camera permission required", Toast.LENGTH_LONG).show();
+                }
+            });
 
     private final ActivityResultLauncher<Intent> galleryLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
@@ -84,26 +100,13 @@ public class ScanFragment extends Fragment {
         if (allPermissionsGranted()) {
             startCamera();
         } else {
-            ActivityCompat.requestPermissions(requireActivity(), REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS);
+            requestPermissionLauncher.launch(REQUIRED_PERMISSIONS);
         }
 
         binding.btnCapture.setOnClickListener(v -> takePhoto());
         binding.btnGallery.setOnClickListener(v -> openGallery());
 
         cameraExecutor = Executors.newSingleThreadExecutor();
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
-            @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == REQUEST_CODE_PERMISSIONS) {
-            if (allPermissionsGranted()) {
-                startCamera();
-            } else {
-                Toast.makeText(requireContext(), "Camera permission required", Toast.LENGTH_LONG).show();
-            }
-        }
     }
 
     private void openGallery() {
@@ -183,8 +186,29 @@ public class ScanFragment extends Fragment {
                         Toast.makeText(requireContext(), "Error parsing result", Toast.LENGTH_SHORT).show();
                     }
                 } else {
-                    Log.e(TAG, "Analysis failed: " + response.code());
-                    Toast.makeText(requireContext(), "Analysis failed", Toast.LENGTH_SHORT).show();
+                    try {
+                        String errorBody = response.errorBody() != null ? response.errorBody().string()
+                                : "No error body";
+                        Log.e(TAG, "Analysis failed - Code: " + response.code());
+                        Log.e(TAG, "Error body: " + errorBody);
+
+                        String errorMessage;
+                        if (response.code() == 429) {
+                            errorMessage = "⚠️ Rate limit exceeded!\n\nYou've made too many requests. Please wait 1-2 minutes and try again.";
+                        } else if (response.code() == 403) {
+                            errorMessage = "Invalid API key. Please check your configuration.";
+                        } else if (response.code() == 400) {
+                            errorMessage = "Bad request. The image format may be invalid.";
+                        } else {
+                            errorMessage = "Analysis failed: " + response.code();
+                        }
+
+                        Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_LONG).show();
+                    } catch (Exception e) {
+                        Log.e(TAG, "Error reading error body", e);
+                        Toast.makeText(requireContext(), "Analysis failed: " + response.code(), Toast.LENGTH_SHORT)
+                                .show();
+                    }
                 }
             }
 

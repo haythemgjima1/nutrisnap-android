@@ -1,89 +1,125 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/background_dark"
-    android:padding="32dp"
-    android:gravity="center">
+    android:background="@drawable/gradient_phantom_background"
+    android:fillViewport="true">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Create Account"
-        android:textSize="36sp"
-        android:fontFamily="sans-serif-medium"
-        android:textStyle="bold"
-        android:textColor="@color/text_primary"
-        android:layout_marginBottom="48dp"/>
-
-    <com.google.android.material.textfield.TextInputLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Email"
-        app:hintTextColor="@color/text_secondary"
-        app:boxStrokeColor="@color/primary_electric_blue"
-        app:boxBackgroundMode="outline"
-        app:boxCornerRadiusTopStart="12dp"
-        app:boxCornerRadiusTopEnd="12dp"
-        app:boxCornerRadiusBottomStart="12dp"
-        app:boxCornerRadiusBottomEnd="12dp"
-        android:layout_marginBottom="20dp">
+        android:orientation="vertical"
+        android:padding="32dp"
+        android:gravity="center">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etEmail"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Create Account"
+            android:textSize="40sp"
+            android:fontFamily="sans-serif-medium"
+            android:textStyle="bold"
+            android:textColor="@color/phantom_text_primary"
+            android:layout_marginTop="60dp"
+            android:layout_marginBottom="12dp"/>
+        
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Join NutriSnap today"
+            android:textSize="16sp"
+            android:fontFamily="sans-serif"
+            android:textColor="@color/phantom_text_secondary"
+            android:layout_marginBottom="48dp"/>
+
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textEmailAddress"
-            android:fontFamily="sans-serif"
-            android:textColor="@color/text_primary"
-            android:padding="16dp"/>
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_marginBottom="20dp"
+            app:cardBackgroundColor="@color/phantom_surface_card"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="0dp"
+            app:strokeWidth="1dp"
+            app:strokeColor="@color/phantom_border_medium">
+            
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Email"
+                app:hintTextColor="@color/phantom_text_tertiary"
+                app:boxBackgroundMode="none"
+                app:boxStrokeWidth="0dp">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Password"
-        app:hintTextColor="@color/text_secondary"
-        app:boxStrokeColor="@color/primary_electric_blue"
-        app:boxBackgroundMode="outline"
-        app:boxCornerRadiusTopStart="12dp"
-        app:boxCornerRadiusTopEnd="12dp"
-        app:boxCornerRadiusBottomStart="12dp"
-        app:boxCornerRadiusBottomEnd="12dp"
-        android:layout_marginBottom="32dp">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress"
+                    android:fontFamily="sans-serif"
+                    android:textColor="@color/phantom_text_primary"
+                    android:textColorHint="@color/phantom_text_tertiary"
+                    android:padding="18dp"
+                    android:background="@android:color/transparent"/>
+            </com.google.android.material.textfield.TextInputLayout>
+        </com.google.android.material.card.MaterialCardView>
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etPassword"
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPassword"
+            android:layout_marginBottom="32dp"
+            app:cardBackgroundColor="@color/phantom_surface_card"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="0dp"
+            app:strokeWidth="1dp"
+            app:strokeColor="@color/phantom_border_medium">
+            
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Password"
+                app:hintTextColor="@color/phantom_text_tertiary"
+                app:boxBackgroundMode="none"
+                app:boxStrokeWidth="0dp"
+                app:endIconMode="password_toggle"
+                app:endIconTint="@color/phantom_text_tertiary">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:fontFamily="sans-serif"
+                    android:textColor="@color/phantom_text_primary"
+                    android:textColorHint="@color/phantom_text_tertiary"
+                    android:padding="18dp"
+                    android:background="@android:color/transparent"/>
+            </com.google.android.material.textfield.TextInputLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSignup"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:text="Sign Up"
+            android:textSize="18sp"
+            android:fontFamily="sans-serif-medium"
+            android:textAllCaps="false"
+            android:textColor="@color/phantom_text_primary"
+            android:background="@drawable/bg_button_phantom"
+            app:cornerRadius="32dp"
+            app:elevation="6dp"
+            android:layout_marginBottom="24dp"/>
+
+        <TextView
+            android:id="@+id/tvGoToLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Already have an account? Login"
+            android:textSize="16sp"
             android:fontFamily="sans-serif"
-            android:textColor="@color/text_primary"
-            android:padding="16dp"/>
-    </com.google.android.material.textfield.TextInputLayout>
+            android:textColor="@color/phantom_accent_teal"
+            android:padding="12dp"/>
 
-    <Button
-        android:id="@+id/btnSignup"
-        android:layout_width="match_parent"
-        android:layout_height="64dp"
-        android:text="Sign Up"
-        android:textSize="18sp"
-        android:fontFamily="sans-serif-medium"
-        android:textAllCaps="false"
-        android:backgroundTint="@color/primary_electric_blue"
-        app:cornerRadius="32dp"
-        android:layout_marginBottom="24dp"/>
-
-    <TextView
-        android:id="@+id/tvGoToLogin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Already have an account? Login"
-        android:textSize="16sp"
-        android:fontFamily="sans-serif"
-        android:textColor="@color/primary_electric_blue"
-        android:padding="12dp"/>
-
-</LinearLayout>
+    </LinearLayout>
+</ScrollView>

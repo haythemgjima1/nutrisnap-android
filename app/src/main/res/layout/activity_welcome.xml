@@ -4,25 +4,35 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/background_dark"
+    android:background="@drawable/gradient_phantom_background"
     android:padding="32dp"
     android:gravity="center">
 
-    <ImageView
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:src="@drawable/logo_image"
-        android:layout_marginBottom="32dp"
-        android:contentDescription="@string/app_name"/>
+    <!-- Logo with glow effect -->
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        app:cardCornerRadius="70dp"
+        app:cardElevation="12dp"
+        app:cardBackgroundColor="@color/phantom_surface_elevated"
+        android:layout_marginBottom="32dp">
+        
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/logo_image"
+            android:layout_gravity="center"
+            android:contentDescription="@string/app_name"/>
+    </com.google.android.material.card.MaterialCardView>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/app_name"
-        android:textSize="48sp"
+        android:textSize="52sp"
         android:fontFamily="sans-serif-medium"
         android:textStyle="bold"
-        android:textColor="@color/primary_electric_blue"
+        android:textColor="@color/phantom_text_primary"
         android:letterSpacing="0.02"
         android:layout_marginBottom="12dp"/>
 
@@ -30,14 +40,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Snap. Track. Thrive."
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:fontFamily="sans-serif-light"
-        android:textColor="@color/text_secondary"
+        android:textColor="@color/phantom_text_secondary"
         android:layout_marginBottom="80dp"
         android:letterSpacing="0.08"
         android:gravity="center"/>
 
-    <Button
+    <!-- Sign Up Button with gradient -->
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btnSignup"
         android:layout_width="match_parent"
         android:layout_height="64dp"
@@ -45,11 +56,14 @@
         android:textSize="18sp"
         android:fontFamily="sans-serif-medium"
         android:textAllCaps="false"
-        android:backgroundTint="@color/primary_electric_blue"
+        android:textColor="@color/phantom_text_primary"
+        android:background="@drawable/bg_button_phantom"
         android:layout_marginBottom="16dp"
-        app:cornerRadius="32dp"/>
+        app:cornerRadius="32dp"
+        app:elevation="6dp"/>
 
-    <Button
+    <!-- Login Button outlined -->
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btnLogin"
         android:layout_width="match_parent"
         android:layout_height="64dp"
@@ -57,9 +71,9 @@
         android:textSize="18sp"
         android:fontFamily="sans-serif-medium"
         android:textAllCaps="false"
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-        android:textColor="@color/white"
-        app:strokeColor="@color/secondary_slate_grey"
+        style="@style/Widget.Material3.Button.OutlinedButton"
+        android:textColor="@color/phantom_text_primary"
+        app:strokeColor="@color/phantom_purple_light"
         app:strokeWidth="2dp"
         android:layout_marginBottom="24dp"
         app:cornerRadius="32dp"/>
@@ -71,7 +85,7 @@
         android:text="Try Demo"
         android:textSize="17sp"
         android:fontFamily="sans-serif"
-        android:textColor="@color/text_secondary"
+        android:textColor="@color/phantom_accent_teal"
         android:padding="16dp"
         android:letterSpacing="0.03"/>
 

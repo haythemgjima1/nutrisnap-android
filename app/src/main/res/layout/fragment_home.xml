@@ -4,7 +4,7 @@
     android:id="@+id/swipeRefresh"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?android:attr/colorBackground">
+    android:background="@drawable/gradient_phantom_background">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -14,96 +14,100 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:padding="20dp">
 
-            <androidx.cardview.widget.CardView
+            <!-- Header -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Today's Progress"
+                android:textSize="28sp"
+                android:fontFamily="sans-serif-medium"
+                android:textStyle="bold"
+                android:textColor="@color/phantom_text_primary"
+                android:layout_marginBottom="20dp"/>
+
+            <!-- Main Stats Card with Gradient -->
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="4dp"
-                android:layout_marginBottom="16dp"
-                app:cardBackgroundColor="?attr/colorSurface">
+                app:cardCornerRadius="20dp"
+                app:cardElevation="8dp"
+                android:layout_marginBottom="24dp"
+                app:cardBackgroundColor="@android:color/transparent"
+                app:strokeWidth="0dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="20dp">
+                    android:background="@drawable/gradient_phantom_card"
+                    android:padding="24dp">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Today's Progress"
-                        android:textSize="20sp"
-                        android:fontFamily="sans-serif-medium"
-                        android:textStyle="bold"
-                        android:textColor="?android:attr/textColorPrimary"
-                        android:layout_marginBottom="16dp"/>
-
+                    <!-- Calories Section -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical"
-                        android:layout_marginBottom="12dp">
+                        android:orientation="vertical"
+                        android:layout_marginBottom="20dp">
 
-                        <LinearLayout
-                            android:layout_width="0dp"
+                        <TextView
+                            android:id="@+id/tvCalories"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
+                            android:text="0 / 2500 kcal"
+                            android:textSize="32sp"
+                            android:fontFamily="sans-serif-medium"
+                            android:textStyle="bold"
+                            android:textColor="@color/phantom_text_primary"/>
 
-                            <TextView
-                                android:id="@+id/tvCalories"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="0 / 2500 kcal"
-                                android:textSize="24sp"
-                                android:fontFamily="sans-serif-medium"
-                                android:textStyle="bold"
-                                android:textColor="@color/primary_electric_blue"/>
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Calories"
-                                android:textSize="14sp"
-                                android:fontFamily="sans-serif"
-                                android:textColor="?android:attr/textColorSecondary"/>
-                        </LinearLayout>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Calories"
+                            android:textSize="14sp"
+                            android:fontFamily="sans-serif"
+                            android:textColor="@color/phantom_text_secondary"
+                            android:layout_marginTop="4dp"/>
                     </LinearLayout>
 
+                    <!-- Progress Bar -->
                     <ProgressBar
                         android:id="@+id/pbCalories"
                         style="?android:attr/progressBarStyleHorizontal"
                         android:layout_width="match_parent"
-                        android:layout_height="8dp"
+                        android:layout_height="12dp"
                         android:max="2500"
                         android:progress="0"
-                        android:progressTint="@color/primary_electric_blue"
-                        android:layout_marginBottom="20dp"/>
+                        android:progressDrawable="@drawable/progress_bar_phantom"
+                        android:layout_marginBottom="24dp"/>
 
+                    <!-- Macros Grid -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:weightSum="3">
 
+                        <!-- Protein -->
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:orientation="vertical"
-                            android:gravity="center">
+                            android:gravity="center"
+                            android:padding="12dp"
+                            android:background="@drawable/bg_stat_card">
 
                             <TextView
                                 android:id="@+id/tvProtein"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="0g"
-                                android:textSize="18sp"
+                                android:textSize="20sp"
                                 android:fontFamily="sans-serif-medium"
                                 android:textStyle="bold"
-                                android:textColor="?android:attr/textColorPrimary"/>
+                                android:textColor="@color/phantom_accent_green"/>
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -111,25 +115,31 @@
                                 android:text="Protein"
                                 android:textSize="12sp"
                                 android:fontFamily="sans-serif"
-                                android:textColor="?android:attr/textColorSecondary"/>
+                                android:textColor="@color/phantom_text_tertiary"
+                                android:layout_marginTop="4dp"/>
                         </LinearLayout>
 
+                        <!-- Carbs -->
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:orientation="vertical"
-                            android:gravity="center">
+                            android:gravity="center"
+                            android:padding="12dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:background="@drawable/bg_stat_card">
 
                             <TextView
                                 android:id="@+id/tvCarbs"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="0g"
-                                android:textSize="18sp"
+                                android:textSize="20sp"
                                 android:fontFamily="sans-serif-medium"
                                 android:textStyle="bold"
-                                android:textColor="?android:attr/textColorPrimary"/>
+                                android:textColor="@color/phantom_accent_blue"/>
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -137,25 +147,29 @@
                                 android:text="Carbs"
                                 android:textSize="12sp"
                                 android:fontFamily="sans-serif"
-                                android:textColor="?android:attr/textColorSecondary"/>
+                                android:textColor="@color/phantom_text_tertiary"
+                                android:layout_marginTop="4dp"/>
                         </LinearLayout>
 
+                        <!-- Fat -->
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:orientation="vertical"
-                            android:gravity="center">
+                            android:gravity="center"
+                            android:padding="12dp"
+                            android:background="@drawable/bg_stat_card">
 
                             <TextView
                                 android:id="@+id/tvFat"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="0g"
-                                android:textSize="18sp"
+                                android:textSize="20sp"
                                 android:fontFamily="sans-serif-medium"
                                 android:textStyle="bold"
-                                android:textColor="?android:attr/textColorPrimary"/>
+                                android:textColor="@color/phantom_accent_pink"/>
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -163,21 +177,23 @@
                                 android:text="Fat"
                                 android:textSize="12sp"
                                 android:fontFamily="sans-serif"
-                                android:textColor="?android:attr/textColorSecondary"/>
+                                android:textColor="@color/phantom_text_tertiary"
+                                android:layout_marginTop="4dp"/>
                         </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
 
+            <!-- Recent Meals Section -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Recent Meals"
-                android:textSize="18sp"
+                android:textSize="20sp"
                 android:fontFamily="sans-serif-medium"
                 android:textStyle="bold"
-                android:textColor="?android:attr/textColorPrimary"
-                android:layout_marginBottom="12dp"/>
+                android:textColor="@color/phantom_text_primary"
+                android:layout_marginBottom="16dp"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvRecentMeals"
@@ -190,9 +206,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="No meals logged today"
-                android:textSize="14sp"
+                android:textSize="15sp"
                 android:fontFamily="sans-serif"
-                android:textColor="?android:attr/textColorSecondary"
+                android:textColor="@color/phantom_text_tertiary"
                 android:layout_gravity="center"
                 android:layout_marginTop="32dp"
                 android:visibility="gone"/>

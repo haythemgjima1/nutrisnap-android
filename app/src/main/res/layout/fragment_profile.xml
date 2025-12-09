@@ -182,7 +182,7 @@
             android:textSize="16sp"
             android:fontFamily="sans-serif-medium"
             app:cornerRadius="12dp"
-            app:backgroundTint="@color/accent_orange"
+            app:backgroundTint="@color/phantom_error"
             android:textColor="@color/white"
             style="@style/Widget.Material3.Button.OutlinedButton"/>
 

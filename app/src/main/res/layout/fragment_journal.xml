@@ -1,52 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/background_dark">
+    android:background="@drawable/gradient_phantom_background">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Meal History"
-        android:textSize="24sp"
-        android:fontFamily="sans-serif-medium"
-        android:textStyle="bold"
-        android:textColor="@color/text_primary"
-        android:padding="16dp"/>
-
-    <CalendarView
-        android:id="@+id/calendarView"
+    <!-- Header -->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"/>
+        android:orientation="vertical"
+        android:padding="20dp"
+        android:background="@drawable/gradient_phantom_primary">
+        
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Meal History"
+            android:textSize="28sp"
+            android:fontFamily="sans-serif-medium"
+            android:textStyle="bold"
+            android:textColor="@color/phantom_text_primary"/>
+        
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Track your nutrition journey"
+            android:textSize="14sp"
+            android:textColor="@color/phantom_text_secondary"
+            android:layout_marginTop="4dp"/>
+    </LinearLayout>
+
+    <!-- Calendar Card -->
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        app:cardBackgroundColor="@color/phantom_surface_card"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="4dp"
+        app:strokeWidth="1dp"
+        app:strokeColor="@color/phantom_border_subtle">
+        
+        <CalendarView
+            android:id="@+id/calendarView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </com.google.android.material.card.MaterialCardView>
 
     <TextView
         android:id="@+id/tvSelectedDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Today's Meals"
-        android:textSize="18sp"
+        android:textSize="20sp"
         android:fontFamily="sans-serif-medium"
-        android:textColor="@color/primary_electric_blue"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="8dp"/>
+        android:textStyle="bold"
+        android:textColor="@color/phantom_text_primary"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="12dp"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvMeals"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:padding="8dp"/>
+        android:padding="16dp"
+        android:clipToPadding="false"/>
 
     <TextView
         android:id="@+id/tvNoMeals"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="No meals logged for this date"
-        android:textSize="14sp"
+        android:textSize="15sp"
         android:fontFamily="sans-serif"
-        android:textColor="@color/text_secondary"
+        android:textColor="@color/phantom_text_tertiary"
         android:layout_gravity="center"
         android:layout_marginTop="32dp"
         android:visibility="gone"/>

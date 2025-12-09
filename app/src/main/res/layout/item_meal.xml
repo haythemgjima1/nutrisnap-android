@@ -1,23 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
-    app:cardCornerRadius="12dp"
-    app:cardElevation="2dp"
-    android:background="@color/surface_dark">
+    app:cardCornerRadius="16dp"
+    app:cardElevation="4dp"
+    app:cardBackgroundColor="@color/phantom_surface_card"
+    app:strokeWidth="1dp"
+    app:strokeColor="@color/phantom_border_subtle">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:padding="18dp">
 
+        <!-- Food Name and Calories -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
 
             <TextView
                 android:id="@+id/tvFoodName"
@@ -25,20 +29,23 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Chicken Salad"
-                android:textSize="16sp"
+                android:textSize="18sp"
                 android:fontFamily="sans-serif-medium"
-                android:textColor="@color/text_primary"/>
+                android:textStyle="bold"
+                android:textColor="@color/phantom_text_primary"/>
 
             <TextView
                 android:id="@+id/tvCalories"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="450 cal"
-                android:textSize="16sp"
+                android:textSize="18sp"
                 android:fontFamily="sans-serif-medium"
-                android:textColor="@color/primary_electric_blue"/>
+                android:textStyle="bold"
+                android:textColor="@color/phantom_purple_light"/>
         </LinearLayout>
 
+        <!-- Meal Time -->
         <TextView
             android:id="@+id/tvMealTime"
             android:layout_width="wrap_content"
@@ -46,44 +53,99 @@
             android:text="12:30 PM"
             android:textSize="14sp"
             android:fontFamily="sans-serif"
-            android:textColor="@color/text_secondary"
-            android:layout_marginTop="4dp"/>
+            android:textColor="@color/phantom_text_secondary"
+            android:layout_marginBottom="12dp"/>
 
+        <!-- Macros Row -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="8dp">
+            android:weightSum="3">
 
-            <TextView
-                android:id="@+id/tvProtein"
+            <!-- Protein -->
+            <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="P: 25g"
-                android:textSize="12sp"
-                android:fontFamily="sans-serif"
-                android:textColor="@color/text_secondary"/>
+                android:orientation="vertical"
+                android:gravity="center">
 
-            <TextView
-                android:id="@+id/tvCarbs"
+                <TextView
+                    android:id="@+id/tvProtein"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="25g"
+                    android:textSize="16sp"
+                    android:fontFamily="sans-serif-medium"
+                    android:textStyle="bold"
+                    android:textColor="@color/phantom_accent_green"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Protein"
+                    android:textSize="11sp"
+                    android:fontFamily="sans-serif"
+                    android:textColor="@color/phantom_text_tertiary"
+                    android:layout_marginTop="2dp"/>
+            </LinearLayout>
+
+            <!-- Carbs -->
+            <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="C: 30g"
-                android:textSize="12sp"
-                android:fontFamily="sans-serif"
-                android:textColor="@color/text_secondary"/>
+                android:orientation="vertical"
+                android:gravity="center">
 
-            <TextView
-                android:id="@+id/tvFat"
+                <TextView
+                    android:id="@+id/tvCarbs"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="30g"
+                    android:textSize="16sp"
+                    android:fontFamily="sans-serif-medium"
+                    android:textStyle="bold"
+                    android:textColor="@color/phantom_accent_blue"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Carbs"
+                    android:textSize="11sp"
+                    android:fontFamily="sans-serif"
+                    android:textColor="@color/phantom_text_tertiary"
+                    android:layout_marginTop="2dp"/>
+            </LinearLayout>
+
+            <!-- Fat -->
+            <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="F: 15g"
-                android:textSize="12sp"
-                android:fontFamily="sans-serif"
-                android:textColor="@color/text_secondary"/>
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/tvFat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="15g"
+                    android:textSize="16sp"
+                    android:fontFamily="sans-serif-medium"
+                    android:textStyle="bold"
+                    android:textColor="@color/phantom_accent_pink"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Fat"
+                    android:textSize="11sp"
+                    android:fontFamily="sans-serif"
+                    android:textColor="@color/phantom_text_tertiary"
+                    android:layout_marginTop="2dp"/>
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
-</androidx.cardview.widget.CardView>
+</com.google.android.material.card.MaterialCardView>

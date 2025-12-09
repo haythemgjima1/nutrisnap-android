@@ -49,17 +49,13 @@ public class SignupActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<AuthResponse> call, Response<AuthResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    // Save token and user info
-                    AuthResponse authResponse = response.body();
-                    getSharedPreferences("NutrisnapPrefs", MODE_PRIVATE)
-                            .edit()
-                            .putBoolean("is_logged_in", true)
-                            .putString("access_token", authResponse.accessToken)
-                            .putString("user_id", authResponse.user.id)
-                            .apply();
+                    // Don't save login state yet - user needs to confirm email first
+                    Toast.makeText(SignupActivity.this,
+                            "Signup Successful! Please check your email to confirm your account.", Toast.LENGTH_LONG)
+                            .show();
 
-                    Toast.makeText(SignupActivity.this, "Signup Successful!", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(SignupActivity.this, OnboardingActivity.class));
+                    // Navigate back to WelcomeActivity
+                    startActivity(new Intent(SignupActivity.this, WelcomeActivity.class));
                     finish();
                 } else {
                     Toast.makeText(SignupActivity.this, "Signup Failed: " + response.message(), Toast.LENGTH_SHORT)
